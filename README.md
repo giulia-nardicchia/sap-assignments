@@ -10,4 +10,4 @@ Identify and write down a significant set of requirements in terms of:
 - event storms
 - quality attribute scenarios
 
-### Github [repository](https://github.com/GiuliaNardicchia/sap-assignments/tree/cbca2fa3eb24e0a27ddef5645536717f96f8f4b9/sap-assignment-02) to Assignment-02
+### Github [repository](https://github.com/giulia-nardicchia/sap-assignments/tree/main/sap-assignment-02) to Assignment-02
