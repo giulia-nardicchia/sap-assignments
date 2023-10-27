@@ -1,0 +1,10 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<project version="4">
+  <component name="CompilerConfiguration">
+    <bytecodeTargetLevel>
+      <module name="sap-assignment.03.app" target="20" />
+      <module name="sap-assignment.03.app.main" target="20" />
+      <module name="sap-assignment.03.app.test" target="20" />
+    </bytecodeTargetLevel>
+  </component>
+</project>

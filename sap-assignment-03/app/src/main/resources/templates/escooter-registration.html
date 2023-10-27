@@ -1,0 +1,18 @@
+<!DOCTYPE html>
+<html xmlns:th="http://www.thymeleaf.org" lang="en">
+<head>
+    <meta charset="UTF-8" />
+    <title>EScooterSystem - EScooter Registration</title>
+</head>
+<body>
+<h2>EScooterSystem - EScooter Registration</h2>
+<form th:action="@{/api/escooters}" th:object="${escooter}" method="post">
+    <p>
+        <label for="id">EScooter ID:</label><br>
+        <input type="text" id="id" th:field="*{id}" value="escooter-01" th:placeholder="escooter-01"><br><br>
+        <button type="submit" id="submit">Submit</button> <br>
+    </p>
+</form>
+<p th:id="result"></p>
+</body>
+</html>

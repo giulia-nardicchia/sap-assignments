@@ -1,4 +1,5 @@
 <project version="4">
+  <component name="ExternalStorageConfigurationManager" enabled="true" />
   <component name="PDMPlugin">
     <option name="skipTestSources" value="false" />
   </component>
