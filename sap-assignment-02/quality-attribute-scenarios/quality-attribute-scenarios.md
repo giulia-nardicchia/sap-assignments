@@ -1,15 +1,15 @@
 # Quality Attribute Scenarios
 
-## Basic examples of formatted QA:
-**Feature**:`[name]`
-- **when** `[what stimulus/event]`
-- **caused by** `[what source]`
-- **occur(s) in** `[what artifact]`
-- **operating in** `[what situation/environment]`
-- **then** `[what response]`
-- **so that** `[response measure]`
+### *Template of quality attribute scenarios*:
+> **Feature**:`[name]`
+> - **when** `[what stimulus/event]`
+> - **caused by** `[what source]`
+> - **occur(s) in** `[what artifact]`
+> - **operating in** `[what situation/environment]`
+> - **then** `[what response]`
+> - **so that** `[response measure]`
 
-# E-scooter Embedded System
+# QA Scenarios - E-scooter Embedded System
 
 ##  -- Availability --
 
@@ -37,9 +37,7 @@
 
 ---
 
-# QA Scenarios - E-Scooter Service System
-
-## User Side Action
+# QA Scenarios - E-Scooter Service System (User Side Actions)
 
 ## -- Availability --
 
@@ -87,7 +85,7 @@
 - **Then**: The system reserves the e-scooter and confirms the booking
 - **So that**: `99.9%` of bookings are successfully confirmed within `1 second`.
 -
-#### Concurrent E-Scooter Booking
+### Concurrent E-Scooter Booking
 **Feature**: Concurrent e-scooter booking
 - **When**: Multiple users try to book the same e-scooter
 - **Caused by**: > 1 user
@@ -153,7 +151,7 @@
 - **Then**: The system requires two-factor authentication
 - **So that**: Unauthorized access is reduced by `99%`.
 
-#### Basic Fraud Security
+### Basic Fraud Security
 **Feature**: Basic fraud security
 - **When**: A scooter is left parked for 5 minutes
 - **Caused by**: The user not terminating the ride
@@ -164,7 +162,7 @@
 
 ---
 
-## QA Scenarios - E-Scooter Company Side
+# QA Scenarios - E-Scooter Company Side
 
 ### Automated User Management
 **Feature**: Automating management of the users and rides
@@ -224,7 +222,7 @@
 
 ---
 
-## QA scenarios - shared among ( user side / company side )
+# QA scenarios - shared among ( user side / company side )
 
 ## -- Reliability --
 
