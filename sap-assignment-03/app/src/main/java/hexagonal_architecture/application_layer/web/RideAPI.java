@@ -1,9 +1,9 @@
 package hexagonal_architecture.application_layer.web;
 
 import hexagonal_architecture.domain_layer.model.Ride;
-import hexagonal_architecture.domain_layer.service.DataService;
-import hexagonal_architecture.application_layer.service.exception.NotYetRegisteredException;
-import hexagonal_architecture.application_layer.service.exception.IdAlreadyExistingException;
+import hexagonal_architecture.domain_layer.service.DomainDataService;
+import hexagonal_architecture.application_layer.service.exception.EScooterNotYetRegisteredException;
+import hexagonal_architecture.application_layer.service.exception.ResourceIdAlreadyExistingException;
 import hexagonal_architecture.application_layer.service.exception.UserNotYetRegisteredException;
 import hexagonal_architecture.domain_layer.service.RideService;
 import org.springframework.beans.factory.annotation.Autowired;
@@ -18,7 +18,7 @@ import java.util.List;
 public class RideAPI {
 
     @Autowired
-    private DataService<Ride, String> rideService;
+    private DomainDataService<Ride, String> rideService;
 
     @GetMapping("/rides")
     public ResponseEntity<List<Ride>> getAllRide() {
@@ -31,7 +31,7 @@ public class RideAPI {
     }
 
     @PostMapping("/rides")
-    public ResponseEntity<Ride> createRide(Ride ride) throws IdAlreadyExistingException, UserNotYetRegisteredException, NotYetRegisteredException {
+    public ResponseEntity<Ride> createRide(Ride ride) throws ResourceIdAlreadyExistingException, UserNotYetRegisteredException, EScooterNotYetRegisteredException {
         return ResponseEntity.ok().body(this.rideService.createResource(ride));
     }
 
@@ -47,8 +47,8 @@ public class RideAPI {
         return HttpStatus.OK;
     }
 
-    @GetMapping("/rides/{id}/end")
-    public ResponseEntity<Ride> endRide(@PathVariable String id) {
+    @GetMapping("/rides/end")
+    public ResponseEntity<Ride> endRide(@RequestParam String id) {
         return ResponseEntity.ok().body(((RideService) this.rideService).endRide(id));
     }
 }

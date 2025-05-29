@@ -9,7 +9,7 @@
 <form th:action="@{/api/rides}" th:object="${ride}" method="post">
     <p>
         <label for="user-id">User ID:</label><br>
-        <input type="text" id="user-id" th:field="*{userId}" value="wwhitman" th:placeholder="wwhitman"><br><br> <!-- th:field="*{user}" -->
+        <input type="text" id="user-id" th:field="*{userId}" value="wwhitman" th:placeholder="wwhitman"><br><br> <!-- TODO th:field="*{user}" -->
         <label for="escooter-id">EScooter ID:</label><br>
         <input type="text" id="escooter-id" th:field="*{escooterId}" value="escooter-01" th:placeholder="escooter-01"><br><br>
         <label for="ride-id">Ride ID:</label><br>
@@ -18,11 +18,11 @@
     </p>
 </form>
 <br><br>
-<form th:action="@{'/api/rides/'+ ${ride.id} +'/end/'}" th:object="${ride}" method="get">
+<form th:action="@{/api/rides/end}" method="get">
     <p>
         <label for="ride-id-end">Ride ID:</label><br>
-        <input type="text" id="ride-id-end" th:field="*{id}" value="ride-01" th:placeholder="ride-01"><br><br>
-        <button type="submit" id="submit-end">End ride</button> <br>
+        <input type="text" id="ride-id-end" name="id" placeholder="ride-01"><br><br>
+        <button type="submit" id="submit-end">End ride</button><br>
     </p>
 </form>
 <p th:id="result"></p>

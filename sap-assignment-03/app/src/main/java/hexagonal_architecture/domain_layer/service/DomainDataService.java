@@ -1,7 +1,7 @@
 package hexagonal_architecture.domain_layer.service;
 
-import hexagonal_architecture.application_layer.service.exception.NotYetRegisteredException;
-import hexagonal_architecture.application_layer.service.exception.IdAlreadyExistingException;
+import hexagonal_architecture.application_layer.service.exception.EScooterNotYetRegisteredException;
+import hexagonal_architecture.application_layer.service.exception.ResourceIdAlreadyExistingException;
 import hexagonal_architecture.application_layer.service.exception.UserNotYetRegisteredException;
 
 import java.util.List;
@@ -11,9 +11,9 @@ import java.util.List;
  * @param <T> represents the type of the data in which the operations can be done.
  * @param <ID> represents the id type.
  */
-public interface DataService<T, ID> {
+public interface DomainDataService<T, ID> {
 
-    T createResource(T data) throws IdAlreadyExistingException, UserNotYetRegisteredException, NotYetRegisteredException;
+    T createResource(T data) throws ResourceIdAlreadyExistingException, UserNotYetRegisteredException, EScooterNotYetRegisteredException;
 
     T updateResource(ID id, T data);
 

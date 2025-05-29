@@ -1,9 +1,9 @@
 package hexagonal_architecture.application_layer.web;
 
 import hexagonal_architecture.domain_layer.model.User;
-import hexagonal_architecture.domain_layer.service.DataService;
-import hexagonal_architecture.application_layer.service.exception.NotYetRegisteredException;
-import hexagonal_architecture.application_layer.service.exception.IdAlreadyExistingException;
+import hexagonal_architecture.domain_layer.service.DomainDataService;
+import hexagonal_architecture.application_layer.service.exception.EScooterNotYetRegisteredException;
+import hexagonal_architecture.application_layer.service.exception.ResourceIdAlreadyExistingException;
 import hexagonal_architecture.application_layer.service.exception.UserNotYetRegisteredException;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.http.HttpStatus;
@@ -17,7 +17,7 @@ import java.util.List;
 public class UserAPI {
 
     @Autowired
-    private DataService<User, String> userService;
+    private DomainDataService<User, String> userService;
 
     @GetMapping("/users")
     public ResponseEntity<List<User>> getAllUsers() {
@@ -30,7 +30,7 @@ public class UserAPI {
     }
 
     @PostMapping("/users")
-    public ResponseEntity<User> createUser(User user) throws IdAlreadyExistingException, UserNotYetRegisteredException, NotYetRegisteredException {
+    public ResponseEntity<User> createUser(User user) throws ResourceIdAlreadyExistingException, UserNotYetRegisteredException, EScooterNotYetRegisteredException {
         return ResponseEntity.ok().body(this.userService.createResource(user));
     }
 

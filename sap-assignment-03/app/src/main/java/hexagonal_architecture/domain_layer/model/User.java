@@ -6,7 +6,7 @@ import org.springframework.data.annotation.Id;
 import org.springframework.data.mongodb.core.mapping.Document;
 
 /**
- * Domain model of the User entity.
+ * Domain model of the User Entity.
  */
 @Document(collection = "user")
 public class User {
@@ -21,6 +21,12 @@ public class User {
     @NotBlank
     @Size(max = 100)
     private String surname;
+
+    public User(String id, String name, String surname) {
+        this.id = id;
+        this.name = name;
+        this.surname = surname;
+    }
 
     public String getId() {
         return this.id;

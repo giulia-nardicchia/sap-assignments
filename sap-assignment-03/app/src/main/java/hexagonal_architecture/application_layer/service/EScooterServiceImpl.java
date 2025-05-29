@@ -2,9 +2,9 @@ package hexagonal_architecture.application_layer.service;
 
 import hexagonal_architecture.application_layer.service.exception.ResourceIdMismatchedException;
 import hexagonal_architecture.domain_layer.model.EScooter;
-import hexagonal_architecture.domain_layer.service.DataService;
+import hexagonal_architecture.domain_layer.service.DomainDataService;
 import hexagonal_architecture.application_layer.service.exception.EScooterNotFoundException;
-import hexagonal_architecture.application_layer.service.exception.IdAlreadyExistingException;
+import hexagonal_architecture.application_layer.service.exception.ResourceIdAlreadyExistingException;
 import hexagonal_architecture.infrastructure_layer.out.persistence.EScooterRepositoryAdapter;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
@@ -17,17 +17,17 @@ import java.util.logging.Logger;
 
 @Service
 @Transactional
-public class EScooterServiceImpl implements DataService<EScooter, String> {
+public class EScooterServiceImpl implements DomainDataService<EScooter, String> {
 
     @Autowired
     private EScooterRepositoryAdapter escooterRepository;
     private Logger logger = Logger.getLogger(this.getClass().getName());
 
     @Override
-    public EScooter createResource(EScooter escooter) throws IdAlreadyExistingException {
+    public EScooter createResource(EScooter escooter) throws ResourceIdAlreadyExistingException {
         Optional<EScooter> escooterDb = this.escooterRepository.findById(escooter.getId());
         if (escooterDb.isPresent()) {
-            throw new IdAlreadyExistingException();
+            throw new ResourceIdAlreadyExistingException();
         }
         return this.escooterRepository.save(escooter);
     }

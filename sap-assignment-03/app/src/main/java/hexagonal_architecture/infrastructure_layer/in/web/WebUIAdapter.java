@@ -3,6 +3,7 @@ package hexagonal_architecture.infrastructure_layer.in.web;
 import hexagonal_architecture.domain_layer.model.Ride;
 import hexagonal_architecture.domain_layer.model.User;
 import hexagonal_architecture.domain_layer.model.EScooter;
+import hexagonal_architecture.domain_layer.service.RideMonitoringService;
 import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;
 import org.springframework.web.bind.annotation.GetMapping;
@@ -19,7 +20,7 @@ public class WebUIAdapter {
 
     @GetMapping("/user")
     public String userRegistration(Model model) {
-        User user = new User();
+        User user = new User("wwhitman", "Walt", "Withman");
         model.addAttribute("user", user);
         return "user-registration";
     }
@@ -36,12 +37,5 @@ public class WebUIAdapter {
         Ride ride = new Ride();
         model.addAttribute("ride", ride);
         return "ride-registration";
-    }
-
-    @GetMapping("/ride-dashboard")
-    public String rideDashboard(Model model) {
-        Ride ride = new Ride();
-        model.addAttribute("ride", ride);
-        return "ride-dashboard";
     }
 }

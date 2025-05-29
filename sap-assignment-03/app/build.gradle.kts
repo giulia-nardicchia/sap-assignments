@@ -43,13 +43,19 @@ dependencies {
     implementation("org.springframework.boot:spring-boot-starter-web:3.1.5")
     // https://mvnrepository.com/artifact/org.springframework.data/spring-data-mongodb
     implementation("org.springframework.data:spring-data-mongodb:4.1.5")
+    // https://mvnrepository.com/artifact/org.springframework.boot/spring-boot-test
+    testImplementation("org.springframework.boot:spring-boot-test:3.1.5")
+    // https://mvnrepository.com/artifact/org.springframework/spring-test
+    testImplementation("org.springframework:spring-test:6.0.13")
 
     // https://mvnrepository.com/artifact/jakarta.validation/jakarta.validation-api
     implementation("jakarta.validation:jakarta.validation-api:3.0.2")
 
     // https://mvnrepository.com/artifact/org.springframework.boot/spring-boot-starter-thymeleaf
     implementation("org.springframework.boot:spring-boot-starter-thymeleaf:3.1.5")
-
+    
+    //Test with Mockito
+    implementation("org.mockito:mockito-core:5.7.0")
 }
 
 // Apply a specific Java toolchain to ease working on different environments.

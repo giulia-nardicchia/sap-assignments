@@ -2,8 +2,8 @@ package hexagonal_architecture.application_layer.service;
 
 import hexagonal_architecture.application_layer.service.exception.ResourceIdMismatchedException;
 import hexagonal_architecture.domain_layer.model.User;
-import hexagonal_architecture.domain_layer.service.DataService;
-import hexagonal_architecture.application_layer.service.exception.IdAlreadyExistingException;
+import hexagonal_architecture.domain_layer.service.DomainDataService;
+import hexagonal_architecture.application_layer.service.exception.ResourceIdAlreadyExistingException;
 import hexagonal_architecture.infrastructure_layer.out.persistence.UserRepositoryAdapter;
 import hexagonal_architecture.application_layer.service.exception.UserNotFoundException;
 import org.springframework.beans.factory.annotation.Autowired;
@@ -18,15 +18,16 @@ import java.util.Optional;
  */
 @Service
 @Transactional
-public class UserServiceImpl implements DataService<User, String> {
+public class UserServiceImpl implements DomainDataService<User, String> {
 
     @Autowired
     private UserRepositoryAdapter userRepository;
+
     @Override
-    public User createResource(User user) throws IdAlreadyExistingException {
+    public User createResource(User user) throws ResourceIdAlreadyExistingException {
         Optional<User> userDb = this.userRepository.findById(user.getId());
         if (userDb.isPresent()) {
-            throw new IdAlreadyExistingException();
+            throw new ResourceIdAlreadyExistingException();
         }
         return this.userRepository.save(user);
     }

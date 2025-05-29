@@ -19,7 +19,7 @@ public class EScooter {
 
     public EScooter() {
         this.state = EScooterState.AVAILABLE;
-        this.location = null;
+        this.location = null; // TODO Optional.empty
     }
 
     public String getId() {

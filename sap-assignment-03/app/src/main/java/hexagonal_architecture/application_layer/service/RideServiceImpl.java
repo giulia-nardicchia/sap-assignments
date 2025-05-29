@@ -2,7 +2,7 @@ package hexagonal_architecture.application_layer.service;
 
 import hexagonal_architecture.application_layer.service.exception.*;
 import hexagonal_architecture.domain_layer.model.*;
-import hexagonal_architecture.domain_layer.service.DataService;
+import hexagonal_architecture.domain_layer.service.DomainDataService;
 import hexagonal_architecture.domain_layer.service.RideService;
 import hexagonal_architecture.infrastructure_layer.out.persistence.EScooterRepositoryAdapter;
 import hexagonal_architecture.infrastructure_layer.out.persistence.RideRepositoryAdapter;
@@ -17,7 +17,7 @@ import java.util.Optional;
 
 @Service
 @Transactional
-public class RideServiceImpl implements DataService<Ride, String>, RideService {
+public class RideServiceImpl implements DomainDataService<Ride, String>, RideService {
 
     @Autowired
     private RideRepositoryAdapter rideRepository;
@@ -25,23 +25,20 @@ public class RideServiceImpl implements DataService<Ride, String>, RideService {
     private UserRepositoryAdapter userRepository;
     @Autowired
     private EScooterRepositoryAdapter escooterRepository;
-
     @Autowired
-    private DataService<User, String> userService; //TODO delete
-    @Autowired
-    private DataService<EScooter, String> escooterService;
+    private DomainDataService<EScooter, String> escooterService;
 
     @Override
-    public Ride createResource(Ride ride) throws IdAlreadyExistingException, UserNotYetRegisteredException, NotYetRegisteredException {
+    public Ride createResource(Ride ride) throws ResourceIdAlreadyExistingException, UserNotYetRegisteredException, EScooterNotYetRegisteredException {
         Optional<Ride> rideDb = this.rideRepository.findById(ride.getId());
         if (rideDb.isPresent()) {
-            throw new IdAlreadyExistingException();
+            throw new ResourceIdAlreadyExistingException();
         }
         if (this.userRepository.findById(ride.getUserId()).isEmpty()) {
             throw new UserNotYetRegisteredException();
         }
         if (this.escooterRepository.findById(ride.getEscooterId()).isEmpty()) {
-            throw new NotYetRegisteredException();
+            throw new EScooterNotYetRegisteredException();
         }
         EScooter updateEscooter = new EScooter();
         updateEscooter.setId(ride.getEscooterId());
@@ -83,16 +80,16 @@ public class RideServiceImpl implements DataService<Ride, String>, RideService {
 
     @Override
     public Ride endRide(String id) {
-        //TODO
-
         Ride rideDb = this.getResourceById(id);
         rideDb.setEndDate(new Date());
         rideDb.setOngoing(false);
 
-        EScooter escooterDb = this.escooterService.getResourceById(rideDb.getEscooterId());
-        escooterDb.setState(EScooter.EScooterState.AVAILABLE);
+        EScooter updateEscooter = new EScooter();
+        updateEscooter.setId(rideDb.getEscooterId());
+        updateEscooter.setState(EScooter.EScooterState.AVAILABLE);
+        updateEscooter.setLocation(new Location(10.0, 15.0)); //TODO
+        this.escooterService.updateResource(rideDb.getEscooterId(), updateEscooter);
 
-        this.escooterRepository.save(escooterDb);
         return this.rideRepository.save(rideDb);
     }
 }

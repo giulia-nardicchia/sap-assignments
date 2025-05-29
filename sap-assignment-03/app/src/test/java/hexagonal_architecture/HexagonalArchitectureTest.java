@@ -18,8 +18,9 @@ class HexagonalArchitectureTest {
                 .domainServices("..domain_layer.service..")
                 .applicationServices("..application_layer..")
                 //.adapter("cli", "..adapter.cli..")
-                .adapter("persistence", "..infrastructure_layer.persistence..")
-                .adapter("rest", "..infrastructure_layer.rest..");
+                .adapter("persistence", "..infrastructure_layer.out.persistence..")
+                //.adapter("rest", "..infrastructure_layer.rest..");
+                .adapter("web", "..infrastructure_layer.in.web..");
         // TODO infrastructure_layer
 
         ruleLayered.check(importedClasses);
